@@ -17,9 +17,18 @@ class WallStopTest(unittest.TestCase):
 
         return left, right
 
+    def get_motor(self):
+        with open("/dev/rtmotor_raw_l0","r") as lf,\
+             open("/dev/rtmotor_raw_r0","r") as rf:
+            left = int(lf.readline().rstrip())
+            right = int(rf.readline().rstrip())
+
+        return left, right
+
     def test_io(self):
         left, right = self.set_and_get(400,100,100,0) #total: 600
         time.sleep(1.0)
+        left, right = self.get_motor()
         self.assertTrue(left == 0 and right == 0,"can't stop")
 
         left, right = self.set_and_get(40,0,0,9) #total: 49
