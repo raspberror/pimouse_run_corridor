@@ -27,7 +27,7 @@ class WallStopTest(unittest.TestCase):
 
     def test_io(self):
         left, right = self.set_and_get(400,100,100,0) #total: 600
-        time.sleep(1.0)
+        time.sleep(2.0)
         left, right = self.get_motor()
         self.assertTrue(left == 0 and right == 0,"can't stop")
 
@@ -39,7 +39,8 @@ class WallStopTest(unittest.TestCase):
         self.assertTrue(2000 < left == right,"can't move again")
 
         left, right = self.set_and_get(15,0,20,15) #total: 50
-        time.sleep(5.0)
+        time.sleep(2.0)
+        left, right = self.get_motor()
         self.assertTrue(left == 0 and right == 0,"can't stop")
 
 if __name__ == '__main__':
